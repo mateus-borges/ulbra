@@ -1,0 +1,57 @@
+#linux wordpress ulbra
+#criado uma nova vpc com o bloco de rede 172.64.0.0/16
+#realizada a criação do internet gateway apontando a saida 0.0.0.0/0 para ele e atrelado ao route table da vpc
+#subnet criada com bloco de rede 162.64.1.0/24
+#para o laboratório foi criado um novo grupo de sg para a instancia liberando todo tráfego ao meu endereço.
+
+
+##dependencias
+#instalação do apache2
+sudo apt install apache2 -y
+
+#para verificar o status do serviço
+systemtctl status apache2 
+#para habilitar o serviço no boot
+systemtctl is-enable apache2 
+
+#instalando php
+apt install php libapache2-mod-php php-mysql
+
+#instalando wordpress
+#download para o diretorio atual
+wget -c http://wordpress.org/latest.tar.gz
+
+#descompatando o arquivo
+tar -xzvf latest.tar.gz
+
+#copiando o diretório descompactado direto do apache2
+sudo cp -R wordpress /var/www/html/aws-ulbra.com
+
+#dando previlégio ao diretório
+chown -R www-data:www-data /var/www/html/aws-ulbra.com
+chmod -R 775 /var/www/html/aws-ulbra.com
+
+#arquivo de configuraçao do wordpress
+cd /var/www/html/aws-ulbra.com/
+
+#realizando a copia do mesmo como wp-config
+mv wp-config-sample.php wp-config.php
+
+#informações a alterar:
+
+
+##AWS##
+#EC2
+linux
+instance type: t2.micro
+
+#RDS
+DB instance identifier - mysql-wordpress-ulbra
+user admin
+key 1324ulbra
+instance type: db.t2.micro
+
+
+
+to do's
+http://dontpad.com/aws-ulbra-mateus-borges
