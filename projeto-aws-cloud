@@ -14,8 +14,14 @@ systemtctl status apache2
 #para habilitar o serviço no boot
 systemtctl is-enable apache2 
 
+#update
+apt-get update
+
 #instalando php
 apt install php libapache2-mod-php php-mysql
+
+#instalando mysqlclient
+sudo apt install mysql-client
 
 #instalando wordpress
 #download para o diretorio atual
@@ -37,7 +43,33 @@ cd /var/www/html/aws-ulbra.com/
 #realizando a copia do mesmo como wp-config
 mv wp-config-sample.php wp-config.php
 
-#informações a alterar:
+
+#config inicial do banco
+#endpoint  mysql-wordpress-ulbra.cabanfxobbec.us-east-1.rds.amazonaws.com
+#conect
+mysql -u admin -h mysql-wordpress-ulbra.cabanfxobbec.us-east-1.rds.amazonaws.com -p
+
+#criando database
+CREATE DATABASE awsulbra;
+#criando usuário
+CREATE USER 'useradmin' IDENTIFIED BY 'useradmin';
+#garantindo previlégios ao mesmo ao banco todo
+GRANT ALL PRIVILEGES ON awsulbra.* TO 'useradmin'@'%' WITH GRANT OPTION;
+#refresh nos previlégios
+FLUSH PRIVILEGES;
+
+#para mostrar o usuário criado
+SELECT user, host FROM mysql.user;
+EXIT
+
+
+
+##wordpress instalation
+site tittle: awsulbra
+username: useradmin
+pass: ddIPW7M$KtrH(be70(
+
+
 
 
 ##AWS##
@@ -50,6 +82,8 @@ DB instance identifier - mysql-wordpress-ulbra
 user admin
 key 1324ulbra
 instance type: db.t2.micro
+
+
 
 
 
