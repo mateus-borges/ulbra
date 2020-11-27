@@ -64,12 +64,24 @@ EXIT
 
 
 
-##wordpress instalation
+##wordpress initial config instalation
 site tittle: awsulbra
 username: useradmin
 pass: ddIPW7M$KtrH(be70(
 
+#config apache2
+sudo vim /etc/apache2/sites-available/aws-ulbra.com.conf
 
+
+#habilitar o novo site
+apache2ctl -t
+sudo a2ensite 000-default.conf
+sudo a2ensite aws-ulbra.com.conf
+sudo systemctl reload apache2
+
+#desabilitar o site default 
+sudo a2dissite 000-default.conf
+sudo systemctl reload apache2
 
 
 ##AWS##
