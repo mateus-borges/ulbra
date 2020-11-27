@@ -1,7 +1,7 @@
 #linux wordpress ulbra
 #criado uma nova vpc com o bloco de rede 172.64.0.0/16
 #realizada a criação do internet gateway apontando a saida 0.0.0.0/0 para ele e atrelado ao route table da vpc
-#subnet criada com bloco de rede 162.64.1.0/24
+#subnet criada com bloco de rede 172.64.1.0/24
 #para o laboratório foi criado um novo grupo de sg para a instancia liberando todo tráfego ao meu endereço.
 
 
@@ -10,9 +10,9 @@
 sudo apt install apache2 -y
 
 #para verificar o status do serviço
-systemtctl status apache2 
+systemctl status apache2 
 #para habilitar o serviço no boot
-systemtctl is-enable apache2 
+systemctl is-enabled apache2 
 
 #update
 apt-get update
